@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spotify Callback</title>
+</head>
+<body>
+    <h1>Spotify Callback Received</h1>
+    <p id="info">Waiting for token...</p>
+
+    <script>
+        // Get the hash part of the URL (after #)
+        const hash = window.location.hash.substring(1);
+        const params = new URLSearchParams(hash);
+
+        // Access token is in access_token
+        const accessToken = params.get("access_token");
+        const expiresIn = params.get("expires_in");
+
+        if (accessToken) {
+            document.getElementById("info").innerHTML =
+                `<strong>Access Token:</strong> ${accessToken}<br>` +
+                `<strong>Expires In:</strong> ${expiresIn} seconds`;
+        } else {
+            document.getElementById("info").innerText =
+                "No access token received. Check that the login completed.";
+        }
+    </script>
+</body>
+</html>
